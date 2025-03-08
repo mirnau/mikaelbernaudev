@@ -11,9 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
       - name: Upload Files via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
@@ -23,5 +20,8 @@ jobs:
           protocol: ftps
           port: ${{ secrets.FTP_PORT }}
           local-dir: ./
-          server-dir: /public_html/ # Change this if your web root is inside a subfolder
-          timeout: 60 
+          server-dir: /public_html/
+          timeout: 120  # Increase timeout in case of slow connections
+          log-level: verbose  # Enable detailed logs for debugging
+          security: strict  # Ensures FTPS is enforced
+      
