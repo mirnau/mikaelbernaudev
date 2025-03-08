@@ -24,4 +24,4 @@ jobs:
           port: ${{ secrets.FTP_PORT }}
           local-dir: ./
           server-dir: /public_html/ # Change this if your web root is inside a subfolder
-          passive: true
+          timeout: 60 
