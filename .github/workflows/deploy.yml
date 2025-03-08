@@ -21,7 +21,6 @@ jobs:
           port: ${{ secrets.FTP_PORT }}
           local-dir: ./
           server-dir: /public_html/
-          timeout: 120  # Increase timeout in case of slow connections
           log-level: verbose  # Enable detailed logs for debugging
           security: strict  # Ensures FTPS is enforced
       
