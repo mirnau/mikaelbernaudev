@@ -1,4 +1,7 @@
-on: push
+on:
+  push:
+    branches:
+      - main  # Only deploy when pushing to the 'main' branch
 
 name: 🚀 Deploy website on push
 
