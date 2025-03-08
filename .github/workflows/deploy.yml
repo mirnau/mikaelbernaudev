@@ -18,9 +18,11 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
-          port: ${{ secrets.FTP_PORT }}
+          port: 21
           local-dir: ./
           server-dir: /public_html/
-          log-level: verbose  # Enable detailed logs for debugging
-          security: strict  # Ensures FTPS is enforced
+          dangerous-clean-slate: true  # Forces a full upload
+          dry-run: false  # Ensures actual file uploads
+          log-level: verbose  # Provides detailed logs
+    
       
