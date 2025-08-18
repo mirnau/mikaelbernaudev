@@ -1,16 +1,22 @@
-<script>
-   import { onMount } from "svelte";
+<script lang="ts">
+   import { onMount, onDestroy } from "svelte";
    import * as THREE from "three";
+   import { Mesh, Material, MeshStandardMaterial } from "three";
    import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
    import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+   import Presentation from "./Presentation.svelte";
 
-   let canvas;
+   let canvas: HTMLCanvasElement;
+   let renderer: THREE.WebGLRenderer | null;
+   let controls: OrbitControls | null;
+   let animationId: number;
+   let scene: THREE.Scene;
 
    onMount(() => {
-      const scene = new THREE.Scene();
+      scene = new THREE.Scene();
 
       const tl = new THREE.TextureLoader();
-      const face = (p) => {
+      const face = (p: string) => {
          const t = tl.load(p);
          t.colorSpace = THREE.SRGBColorSpace;
          return new THREE.MeshBasicMaterial({ map: t, side: THREE.BackSide });
@@ -30,7 +36,7 @@
       const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
       camera.position.set(0, 0, 45);
 
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
       renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
       renderer.setSize(innerWidth, innerHeight);
       renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -40,57 +46,88 @@
       dir.position.set(10, 15, 20);
       scene.add(hemi, dir);
 
-      const controls = new OrbitControls(camera, renderer.domElement);
-      const tilt = THREE.MathUtils.degToRad(15);
-      const dist = camera.position.distanceTo(controls.target);
-      controls.target.set(0, Math.tan(tilt) * dist, 0);
-      camera.lookAt(controls.target);
-      controls.update();
+      controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableZoom = false;
+
+      const baseDist = camera.position.distanceTo(controls.target);
+      const setTiltDeg = (deg: number) => {
+         const tilt = THREE.MathUtils.degToRad(deg);
+         controls!.target.set(0, Math.tan(tilt) * baseDist, 0);
+         camera.lookAt(controls!.target);
+         controls!.update();
+      };
+      setTiltDeg(15);
 
       const raycaster = new THREE.Raycaster();
       const mouseNDC = new THREE.Vector2();
       const mouseWorld = new THREE.Vector3(0, 0, 0);
       const attractSphere = new THREE.Sphere(new THREE.Vector3(0, 0, 0), 22);
 
-      addEventListener("mousemove", (e) => {
+      const mouseHandler = (e: MouseEvent) => {
          mouseNDC.x = (e.clientX / innerWidth) * 2 - 1;
          mouseNDC.y = -(e.clientY / innerHeight) * 2 + 1;
          raycaster.setFromCamera(mouseNDC, camera);
          const hit = raycaster.ray.intersectSphere(attractSphere, mouseWorld);
          if (!hit) raycaster.ray.at(22, mouseWorld);
-      });
+      };
+      addEventListener("mousemove", mouseHandler);
+
+      const scrollToTilt = () => {
+         const doc = document.documentElement;
+         const max = Math.max(1, doc.scrollHeight - doc.clientHeight);
+         const ratio = THREE.MathUtils.clamp(doc.scrollTop / max, 0, 1);
+         const deg = THREE.MathUtils.lerp(15, 80, ratio);
+         setTiltDeg(deg);
+      };
+      const scrollHandler = () => scrollToTilt();
+      addEventListener("scroll", scrollHandler, { passive: true });
+      scrollToTilt();
 
       const params = {
-         count: 30,
-         maxSpeed: 6.2,
+         count: 5,
+         maxSpeed: 3.2,
          maxForce: 0.18,
          neighborDist: 14,
-         desiredSeparation: 3.0,
-         alignWeight: 0.1,
+         desiredSeparation: 5.0,
+         alignWeight: 1.1,
          cohWeight: 0.2,
          sepWeight: 2.5,
          seekWeight: 2.2,
       };
 
-      const boids = [];
+      const osc = (min: number, max: number, period: number, phase = 0) => {
+         const mid = (min + max) / 2;
+         const amp = (max - min) / 2;
+         const w = (Math.PI * 2) / period;
+         return (t: number) => mid + amp * Math.sin(w * t + phase);
+      };
 
-      function limit(v, max) {
+      const seekWave = osc(1.5, 5.0, 40, 0);
+      const speedWave = osc(2.6, 8.8, 60, Math.PI / 3);
+      const forceWave = osc(0.2, 0.24, 50, Math.PI / 5);
+      const sepWave = osc(2.0, 3.0, 55, Math.PI / 2);
+      const alignWave = osc(0.8, 1.4, 70, Math.PI / 7);
+      const cohWave = osc(0.1, 0.3, 90, Math.PI / 9);
+
+      const boids: THREE.Object3D[] = [];
+
+      function limit(v: THREE.Vector3, max: number) {
          const l2 = v.lengthSq();
          if (l2 > max * max) v.setLength(max);
          return v;
       }
 
-      function steerTowards(boid, target, weight = 1) {
+      function steerTowards(boid: any, target: THREE.Vector3, weight = 1) {
          const desired = new THREE.Vector3().subVectors(target, boid.position);
          if (desired.lengthSq() === 0) return new THREE.Vector3();
-         desired.setLength(params.maxSpeed);
+         desired.setLength(params.maxSpeed * (boid.userData?.speedFactor ?? 1));
          const steer = desired.sub(boid.userData.vel);
          limit(steer, params.maxForce);
          return steer.multiplyScalar(weight);
       }
 
       function flock() {
-         for (const b of boids) {
+         for (const b of boids as any[]) {
             const sep = new THREE.Vector3();
             const ali = new THREE.Vector3();
             const coh = new THREE.Vector3();
@@ -98,7 +135,7 @@
                nC = 0,
                nS = 0;
 
-            for (const o of boids) {
+            for (const o of boids as any[]) {
                if (o === b) continue;
                const d = b.position.distanceTo(o.position);
                if (d < params.neighborDist) {
@@ -115,15 +152,20 @@
             }
 
             if (nA) {
-               ali.divideScalar(nA).setLength(params.maxSpeed).sub(b.userData.vel);
+               ali.divideScalar(nA)
+                  .setLength(params.maxSpeed * (b.userData.speedFactor ?? 1))
+                  .sub(b.userData.vel);
                limit(ali, params.maxForce);
             }
             if (nC) {
-               coh.divideScalar(nC).sub(b.position).setLength(params.maxSpeed).sub(b.userData.vel);
+               coh.divideScalar(nC)
+                  .sub(b.position)
+                  .setLength(params.maxSpeed * (b.userData.speedFactor ?? 1))
+                  .sub(b.userData.vel);
                limit(coh, params.maxForce);
             }
             if (nS) {
-               sep.setLength(params.maxSpeed).sub(b.userData.vel);
+               sep.setLength(params.maxSpeed * (b.userData.speedFactor ?? 1)).sub(b.userData.vel);
                limit(sep, params.maxForce);
             }
 
@@ -132,13 +174,13 @@
             b.userData.acc
                .set(0, 0, 0)
                .add(sep.multiplyScalar(params.sepWeight))
-               .add(ali.multiplyScalar(params.alignWeight))
+               .add(ali.multiplyScalar(params.alignWeight * (b.userData.alignFactor ?? 1)))
                .add(coh.multiplyScalar(params.cohWeight))
                .add(seek);
 
             const r = attractSphere.radius + 3;
-            const dist = b.position.length();
-            if (dist > r) {
+            const dist2 = b.position.length();
+            if (dist2 > r) {
                const back = b.position.clone().multiplyScalar(-1).setLength(params.maxSpeed).sub(b.userData.vel);
                limit(back, params.maxForce * 1.2);
                b.userData.acc.add(back);
@@ -146,12 +188,11 @@
          }
       }
 
-      function updateBoids(dt) {
-         for (const b of boids) {
+      function updateBoids(dt: number) {
+         for (const b of boids as any[]) {
             b.userData.vel.add(b.userData.acc.multiplyScalar(dt));
-            limit(b.userData.vel, params.maxSpeed);
+            limit(b.userData.vel, params.maxSpeed * (b.userData.speedFactor ?? 1));
             b.position.addScaledVector(b.userData.vel, dt);
-
             if (b.userData.vel.lengthSq() > 1e-4) {
                const dir = b.userData.vel.clone().normalize();
                const quat = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 0, 1), dir);
@@ -165,7 +206,6 @@
          "/plane.glb",
          (gltf) => {
             const object = gltf.scene;
-
             const box = new THREE.Box3().setFromObject(object);
             const size = new THREE.Vector3();
             box.getSize(size);
@@ -178,13 +218,37 @@
 
             for (let i = 0; i < params.count; i++) {
                const m = object.clone(true);
-               m.position.set((Math.random() - 0.5) * 30, (Math.random() - 0.5) * 18, (Math.random() - 0.5) * 30);
-               m.userData.vel = new THREE.Vector3(
+
+               m.traverse((o) => {
+                  if (!(o instanceof Mesh)) return;
+                  const mats = Array.isArray(o.material) ? o.material : [o.material];
+                  const newMats: Material[] = mats.map((mat) => {
+                     const std = mat as MeshStandardMaterial;
+                     if (!("color" in std) || !std.color) return mat;
+                     const clone = std.clone();
+                     const hsl = { h: 0, s: 0, l: 0 };
+                     clone.color.getHSL(hsl);
+                     hsl.s = THREE.MathUtils.clamp(hsl.s * (0.9 + Math.random() * 0.2), 0, 1);
+                     clone.color.setHSL(hsl.h, hsl.s, hsl.l);
+                     return clone;
+                  });
+                  o.material = newMats.length === 1 ? newMats[0] : newMats;
+               });
+
+               (m as any).position.set(
+                  (Math.random() - 0.5) * 30,
+                  (Math.random() - 0.5) * 18,
+                  (Math.random() - 0.5) * 30
+               );
+               (m as any).userData.vel = new THREE.Vector3(
                   Math.random() - 0.5,
                   Math.random() - 0.5,
                   Math.random() - 0.5
                ).setLength(params.maxSpeed * 0.5);
-               m.userData.acc = new THREE.Vector3();
+               (m as any).userData.acc = new THREE.Vector3();
+               (m as any).userData.speedFactor = 0.9 + Math.random() * 0.2;
+               (m as any).userData.alignFactor = 0.8 + Math.random() * 0.4;
+
                scene.add(m);
                boids.push(m);
             }
@@ -196,27 +260,88 @@
       );
 
       let last = performance.now();
+      let t = 0;
       function animate() {
-         requestAnimationFrame(animate);
+         animationId = requestAnimationFrame(animate);
          const now = performance.now();
          const dt = Math.min(0.033, (now - last) / 1000);
          last = now;
+         t += dt;
+
+         params.seekWeight = seekWave(t);
+         params.maxSpeed = speedWave(t);
+         params.maxForce = forceWave(t);
+         params.sepWeight = sepWave(t);
+         params.alignWeight = alignWave(t);
+         params.cohWeight = cohWave(t);
+
          skyMesh.rotation.y += THREE.MathUtils.degToRad(0.5) * dt;
          flock();
          updateBoids(dt);
-         controls.update();
-         renderer.render(scene, camera);
+         controls!.update();
+         renderer!.render(scene, camera);
       }
       animate();
 
-      addEventListener("resize", () => {
+      const resizeHandler = () => {
          camera.aspect = innerWidth / innerHeight;
          camera.updateProjectionMatrix();
-         renderer.setSize(innerWidth, innerHeight);
+         renderer!.setSize(innerWidth, innerHeight);
+      };
+      addEventListener("resize", resizeHandler);
+
+      onDestroy(() => {
+         removeEventListener("mousemove", mouseHandler);
+         removeEventListener("scroll", scrollHandler);
+         removeEventListener("resize", resizeHandler);
+         cancelAnimationFrame(animationId);
+         controls?.dispose();
+         renderer?.dispose();
+         renderer?.forceContextLoss?.();
+         if (renderer) renderer.domElement = null as any;
+         renderer = null;
+         controls = null;
       });
    });
 </script>
 
-<main>
+<main class="app">
    <canvas bind:this={canvas} id="bg"></canvas>
+
+
+   <section class="content">
+      <h1>Mikael Bernau</h1>
+      <h2>Game Developer</h2>
+      <p>This portfolio is under construction!</p>
+      <div style="height: 200vh;"></div>
+   </section>
+
+
+   <Presentation></Presentation>
 </main>
+
+<style>
+
+   .app {
+      position: relative; /* keep it as the stacking root */
+   }
+
+   #bg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1; /* push canvas behind content */
+      display: block;
+      pointer-events: none;
+   }
+
+   .content {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px;
+      color: #fff; /* visible over skybox */
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); /* extra readability */
+   }
+</style>
