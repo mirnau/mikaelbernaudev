@@ -1,8 +1,9 @@
-   <div class="overlay">Hello World</div>
+   <div class="overlay">"Hello World"</div>
    
 
 <style>
    .overlay {
+    display: none;
       position: absolute;
       top: 20px;
       left: 20px;
