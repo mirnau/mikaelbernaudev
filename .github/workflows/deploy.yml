@@ -3,18 +3,24 @@ on:
     branches:
       - main  # Only deploy when pushing to the 'main' branch
 
-name: 🚀 Deploy website on push
+name: 🚀 Build and Deploy website on push
 
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: 🎉 Build and Deploy
     runs-on: ubuntu-latest
 
     steps:
       - name: 📥 Get latest code
         uses: actions/checkout@v3
 
-      - name: 📂 Sync files
+      - name: 🏗 Install dependencies
+        run: npm install  # Ensures dependencies are available
+
+      - name: 🔧 Build project
+        run: npm run build  # Generates the static site (adjust if needed)
+
+      - name: 📂 Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_HOST }}
@@ -22,3 +28,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           server-dir: /public_html/
+          local-dir: dist/  # Only upload the built files
