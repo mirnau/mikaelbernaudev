@@ -5,6 +5,15 @@
    import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
    import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
    import Presentation from "./Presentation.svelte";
+   import BlockFrame from "./BlockFrame.svelte";
+   import Portrait from "./Portrait.svelte";
+   import Grid from "./Grid.svelte";
+   import Socials from "./Socials.svelte";
+   import ProjectCarousel from "./ProjectCarousel.svelte";
+   import ProjectWindow from "./ProjectWindow.svelte";
+   import BlueSky from "./BlueSky.svelte";
+   import YouTube from "./YouTube.svelte";
+   import type { Project, ProjectDetailLoader } from "./types";
 
    let canvas: HTMLCanvasElement;
    let renderer: THREE.WebGLRenderer | null;
@@ -84,7 +93,7 @@
       scrollToTilt();
 
       const params = {
-         count: 5,
+         count: 10,
          maxSpeed: 3.2,
          maxForce: 0.18,
          neighborDist: 14,
@@ -303,27 +312,160 @@
          controls = null;
       });
    });
+
+   const links = [
+      { kind: "github", href: "https://github.com/yourname", label: "GitHub" },
+      { kind: "bluesky", href: "https://bsky.app/profile/yourname", label: "BlueSky" },
+      { kind: "youtube", href: "https://youtube.com/@yourname", label: "YouTube" },
+      { kind: "linkedin", href: "https://www.linkedin.com/in/yourname", label: "LinkedIn" },
+      { kind: "website", href: "https://yourdomain.tld", label: "Website" },
+   ];
+
+   const items: Project[] = [
+      {
+         slug: "aquanaut",
+         title: "The Aquanaut - Final Game Production at Uni",
+         image: "/projects/theaquanaut/path-recording.png",
+         href: "https://youtu.be/Z8rKl2mNWtI",
+         description: "A rouge-lite underwater game. The image is from the game play path-recorder tool I wrote!",
+         tags: ["C#", "Unity", "Blender", "Adobe Creative Suite", "Teambuilding"],
+         detail: () => import("./projects/theaquanaut/TheAquanaut.svelte"),
+         detailProps: { year: 2023 },
+      },
+      {
+         slug: "sr3d",
+         title: "TTRPG Extention for Virtual Table Top Gaming - Iteration I",
+         image: "/projects/foundrysr3d/homebrew.png",
+         href: "https://youtu.be/YPmnX_Gp1uk",
+         description: "A Homebrew System for Shadowrun 3d Edition in Foundry VTT - First Iteration",
+         tags: ["JavaScript", "Handlebars", "LESS", "CSS", "Masonry"],
+         detail: () => import("./projects/foundrysr3d/FoundryFirstIteration.svelte"),
+         detailProps: { year: 2024 },
+      },
+   ];
+
+   let show = $state(false);
+   let selected = $state<Project | null>(null);
+
+   function openProject(p: Project) {
+      selected = p;
+      show = true;
+   }
+   function closeProject() {
+      show = false;
+   }
 </script>
 
 <main class="app">
    <canvas bind:this={canvas} id="bg"></canvas>
-
+   <ProjectWindow
+      open={show}
+      project={selected}
+      on:close={() => {
+         show = false;
+      }}
+   />
 
    <section class="content">
-      <h1>Mikael Bernau</h1>
-      <h2>Game Developer</h2>
-      <p>This portfolio is under construction!</p>
+      <div>
+         <h1>Mikael Bernau</h1>
+         <h2>Game Developer - Unity Developer - Software Developer</h2>
+      </div>
+
+      <Grid columns="1fr">
+         <BlockFrame>
+            <h3>Game programmer and development passionate about software and games!</h3>
+            <h2>Socials --></h2>
+            <Socials size="1rem" />
+         </BlockFrame>
+         <BlockFrame>
+            <ProjectCarousel {items} onOpen={openProject} />
+         </BlockFrame>
+      </Grid>
+      <Grid columns="1fr 1fr">
+         <BlockFrame>
+            <h2>Next Up</h2>
+            <p>
+               <b
+                  >Finding my tribe at a passionate and creative company who are as obsessed by games and a good story
+                  as I am!
+               </b> New in games but not new in the game, I look forward to make a difference, as a skilled code monkey and
+               a game creative. I look forward to contributing to some amazing work!
+            </p>
+            <h2>Looking for Work</h2>
+            <h5>2023-</h5>
+            <p>
+               Landing a game or software devjob is hard and it has been gnawrly for sometime. I am proud to do my best
+               to find new opportunities. I do my outmost to keep up with the competition. I dedicate a lot of time to
+               work on portfolio, learning French and working out while I keep calm and carry on. I keept the flame
+               alive.
+            </p>
+            <hr />
+            <h2>Work Experience</h2>
+            <h4>Not gonna write it again, 'cause you wont read this anyway</h4>
+            <p>
+               All information on my 10+ year work experience from my previous field, culture- and communication, are
+               listed in detail on my LinkedIn.
+            </p>
+            <center>
+               <a
+                  href="https://www.linkedin.com/in/mikaelbernau/"
+                  class="icon-btn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  style="font-size:3rem"
+               >
+                  <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+               </a>
+            </center>
+         </BlockFrame>
+         <BlockFrame>
+            <h2>Education</h2>
+            <h3>B.A. Game Development</h3>
+            <h4>Malmö University</h4>
+            <h5>2020-2023</h5>
+            <hr />
+            <h3>M.A. Media Production</h3>
+            <h4>Linköping University</h4>
+            <h5>2006-2006</h5>
+            <hr />
+            <h3>Fine Art</h3>
+            <h4>Göteborgs Konstskola</h4>
+            <h5>2010-2011</h5>
+            <hr />
+            <h3>Fine Art</h3>
+            <h4>Konstskolan Munka</h4>
+            <h5>2010-2011</h5>
+            <hr />
+            <h3>M.A. Media Production</h3>
+            <h4>Linköping University</h4>
+            <h5>2006-2006</h5>
+         </BlockFrame>
+         <BlockFrame>
+            <BlueSky />
+         </BlockFrame>
+      </Grid>
+      <Grid columns="1fr">
+         <BlockFrame>
+            <h2>Portfolio Playlist</h2>
+            <YouTube playlistId="PLMLHGkm3KdCb1yaUYPQYeXP011pkAUXzD" />
+         </BlockFrame>
+         <BlockFrame>
+            <h2>Work in Progress!</h2>
+            <p>
+               Please come back as I add more project during the comming weeks. I hope to see you here again!
+            </p>
+            </BlockFrame>
+      </Grid>
       <div style="height: 200vh;"></div>
    </section>
-
-
-   <Presentation></Presentation>
 </main>
 
 <style>
-
    .app {
-      position: relative; /* keep it as the stacking root */
+      width: 100%;
+      position: relative;
    }
 
    #bg {
@@ -338,10 +480,10 @@
 
    .content {
       position: relative;
-      max-width: 960px;
       margin: 0 auto;
-      padding: 24px;
+      padding: 0 auto;
       color: #fff; /* visible over skybox */
+      background: transparent;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); /* extra readability */
    }
 </style>

@@ -1,17 +1,13 @@
-   <div class="overlay">"Hello World"</div>
-   
+<img src="/jag.png" alt="Mikael Bernau" class="avatar" />
 
 <style>
-   .overlay {
-    display: none;
+   .avatar {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      padding: 6px 12px;
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      font-family: sans-serif;
-      border-radius: 8px;
-      pointer-events: none; /* don’t block mouse on canvas */
+      top: 135px;
+      left: -250px;
+      width: 200px; /* or whatever size you want */
+      height: 200px; /* keep square for perfect circle */
+      border-radius: 50%; /* circular mask */
+      object-fit: cover; /* keeps aspect ratio, crops overflow */
    }
 </style>
