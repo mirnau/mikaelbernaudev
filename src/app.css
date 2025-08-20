@@ -74,6 +74,6 @@ hr {
       width: 90%;
    }
    .noshow {
-      display: none;
+      color: transparent;
    }
 }
