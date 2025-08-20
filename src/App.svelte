@@ -25,12 +25,35 @@
    onMount(() => {
       scene = new THREE.Scene();
 
+      const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
+      camera.position.set(0, 0, 45);
+
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.setSize(innerWidth, innerHeight);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+      const maxAniso = renderer.capabilities.getMaxAnisotropy();
+
+      // skybox (keep your six PNGs)
       const tl = new THREE.TextureLoader();
       const face = (p: string) => {
-         const t = tl.load(p);
-         t.colorSpace = THREE.SRGBColorSpace;
-         return new THREE.MeshBasicMaterial({ map: t, side: THREE.BackSide });
+         const tex = tl.load(p, (t) => {
+            t.colorSpace = THREE.SRGBColorSpace;
+            t.minFilter = THREE.LinearMipmapLinearFilter;
+            t.magFilter = THREE.LinearFilter;
+            t.anisotropy = maxAniso;
+            t.needsUpdate = true;
+         });
+         // safe to set immediately too:
+         tex.minFilter = THREE.LinearMipmapLinearFilter;
+         tex.magFilter = THREE.LinearFilter;
+         tex.generateMipmaps = true;
+         tex.anisotropy = maxAniso;
+
+         return new THREE.MeshBasicMaterial({ map: tex, side: THREE.BackSide });
       };
+
       const skyMat = [
          face("/skybox/px.png"),
          face("/skybox/nx.png"),
@@ -39,17 +62,10 @@
          face("/skybox/pz.png"),
          face("/skybox/nz.png"),
       ];
+
       const skyGeo = new THREE.BoxGeometry(1000, 1000, 1000);
       const skyMesh = new THREE.Mesh(skyGeo, skyMat);
       scene.add(skyMesh);
-
-      const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
-      camera.position.set(0, 0, 45);
-
-      renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-      renderer.setSize(innerWidth, innerHeight);
-      renderer.outputColorSpace = THREE.SRGBColorSpace;
 
       // --- Three-point lighting setup ---
       const keyLight = new THREE.DirectionalLight(0xfff2db, 1.0);
@@ -63,8 +79,6 @@
 
       scene.add(keyLight, fillLight, rimLight);
 
-      // --- Visualization helpers ---
-    
       controls = new OrbitControls(camera, renderer.domElement);
       controls.enableZoom = false;
 
