@@ -5,9 +5,8 @@
    import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
    import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
    import { DirectionalLightHelper } from "three";
-   import Presentation from "./Presentation.svelte";
    import BlockFrame from "./BlockFrame.svelte";
-   import Portrait from "./Portrait.svelte";
+   import PDFThumb from "./PDFThumb.svelte";
    import Grid from "./Grid.svelte";
    import Socials from "./Socials.svelte";
    import ProjectCarousel from "./ProjectCarousel.svelte";
@@ -337,14 +336,6 @@
       });
    });
 
-   const links = [
-      { kind: "github", href: "https://github.com/yourname", label: "GitHub" },
-      { kind: "bluesky", href: "https://bsky.app/profile/yourname", label: "BlueSky" },
-      { kind: "youtube", href: "https://youtube.com/@yourname", label: "YouTube" },
-      { kind: "linkedin", href: "https://www.linkedin.com/in/yourname", label: "LinkedIn" },
-      { kind: "website", href: "https://yourdomain.tld", label: "Website" },
-   ];
-
    const items: Project[] = [
       {
          slug: "aquanaut",
@@ -398,7 +389,7 @@
 
       <Grid columns="1fr">
          <BlockFrame>
-            <h3>Game programmer and development passionate about software and games!</h3>
+            <h3>Game programmer and development passionate about games and software!</h3>
             <h2>Socials --></h2>
             <Socials size="1rem" />
          </BlockFrame>
@@ -414,22 +405,32 @@
                   >Finding my tribe at a passionate and creative company who are as obsessed by games and a good story
                   as I am!
                </b> New in games but not new in the game, I look forward to make a difference, as a skilled code monkey and
-               a game creative. I look forward to contributing to some amazing work!
+               a talented generalist game creative. I look forward to contributing to some amazing work!
             </p>
             <h2>Looking for Work</h2>
             <h5>2023-</h5>
             <p>
                Landing a game or software devjob is hard and it has been gnawrly for sometime. I am proud to do my best
                to find new opportunities. I do my outmost to keep up with the competition. I dedicate a lot of time to
-               work on portfolio, learning French and working out while I keep calm and carry on. I keept the flame
-               alive.
+               work on portfolio by myself and in colaborative projects with friends while taking care to feed the soul
+               by learning French and working out.
             </p>
             <hr />
-            <h2>Work Experience</h2>
-            <h4>Not gonna write it again, 'cause you wont read this anyway</h4>
+            <h2>Curriculum Vitae</h2>
+            <p>
+               Here is the current resume for you to view, from the perspective of my current change of career paths. It
+               lists the latest seven years of work experience and most of my education.
+            </p>
+            <center><PDFThumb src="/docs/resume_mikael_bernau.pdf" caption={"Resume"} /></center>
+            <h3>LinkedIn Profile</h3>
             <p>
                All information on my 10+ year work experience from my previous field, culture- and communication, are
-               listed in detail on my LinkedIn.
+               listed in detail on my LinkedIn. If you are interested in the details they are all there!
+            </p>
+            <p>
+               <b>Please feel free to send me a contact request</b>, if you like my portfolio, if you are in computer or
+               software developer sphere as a programmer, creative or recruiter. I am open to networking, colabs and
+               game jams or just a friendly chat.
             </p>
             <center>
                <a

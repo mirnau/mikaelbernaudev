@@ -4,6 +4,17 @@
 </script>
 
 <nav class="social-bar" style={`--icon-size: ${size}`}>
+   <a
+      href="https://www.artstation.com/mikaelbernau"
+      class="icon-btn"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="ArtStation"
+      style={`font-size:${size}`}
+   >
+      <i class="fa-brands fa-artstation" aria-hidden="true"></i>
+   </a>
+
    <a href="https://youtube.com/@devdrawdiy" target="_blank" aria-label="YouTube">
       <i class="fa-brands fa-youtube"></i>
    </a>
