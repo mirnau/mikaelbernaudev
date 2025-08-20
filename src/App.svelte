@@ -4,6 +4,7 @@
    import { Mesh, Material, MeshStandardMaterial } from "three";
    import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
    import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+   import { DirectionalLightHelper } from "three";
    import Presentation from "./Presentation.svelte";
    import BlockFrame from "./BlockFrame.svelte";
    import Portrait from "./Portrait.svelte";
@@ -50,11 +51,20 @@
       renderer.setSize(innerWidth, innerHeight);
       renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-      const hemi = new THREE.HemisphereLight(0xffffff, 0x222233, 0.7);
-      const dir = new THREE.DirectionalLight(0xffffff, 0.7);
-      dir.position.set(10, 15, 20);
-      scene.add(hemi, dir);
+      // --- Three-point lighting setup ---
+      const keyLight = new THREE.DirectionalLight(0xfff2db, 1.0);
+      keyLight.position.set(0, 20, 10);
 
+      const fillLight = new THREE.DirectionalLight(0xff91c8, 0.6);
+      fillLight.position.set(0, -10, 0);
+
+      const rimLight = new THREE.DirectionalLight(0xaeebe6, 0.8);
+      rimLight.position.set(0, 0, 100);
+
+      scene.add(keyLight, fillLight, rimLight);
+
+      // --- Visualization helpers ---
+    
       controls = new OrbitControls(camera, renderer.domElement);
       controls.enableZoom = false;
 
@@ -453,10 +463,8 @@
          </BlockFrame>
          <BlockFrame>
             <h2>Work in Progress!</h2>
-            <p>
-               Please come back as I add more project during the comming weeks. I hope to see you here again!
-            </p>
-            </BlockFrame>
+            <p>Please come back as I add more project during the comming weeks. I hope to see you here again!</p>
+         </BlockFrame>
       </Grid>
       <div style="height: 200vh;"></div>
    </section>

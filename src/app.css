@@ -46,14 +46,30 @@ hr {
 
 #app {
    margin: 0 auto;
-   padding: 2rem;
+   padding: 1rem;
    text-align: justify;
-
    width: 40%;
+
+   transition: width 280ms ease; /* animate when MQ swaps values */
+}
+@media (max-width: 1800px) {
+   #app {
+      width: 70%;
+   }
 }
 
+@media (max-width: 1500px) {
+   #app {
+      width: 80%;
+   }
+}
 @media (max-width: 1000px) {
    #app {
-      width: 100%;
+      width: 85%;
+   }
+}
+@media (max-width: 800px) {
+   #app {
+      width: 90%;
    }
 }

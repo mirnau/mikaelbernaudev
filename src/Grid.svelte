@@ -40,4 +40,10 @@
          columns: 1;
       }
    }
+
+   @media (max-width: 1000px) {
+      .grid.gridmode {
+         grid-template-columns: 1fr !important;
+      }
+   }
 </style>
