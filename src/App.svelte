@@ -6,6 +6,7 @@
    import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
    import { DirectionalLightHelper } from "three";
    import BlockFrame from "./BlockFrame.svelte";
+   import BlogFeed from "./BlogFeed.svelte";
    import PDFThumb from "./PDFThumb.svelte";
    import Grid from "./Grid.svelte";
    import Socials from "./Socials.svelte";
@@ -505,6 +506,10 @@
          <BlockFrame>
             <h2>Portfolio Playlist</h2>
             <YouTube playlistId="PLMLHGkm3KdCb1yaUYPQYeXP011pkAUXzD" />
+         </BlockFrame>
+         <BlockFrame>
+            <h2>Dev Log Feed</h2>
+            <BlogFeed src="https://mikaelbernau.wixsite.com/portfolio/blog-feed.xml" limit={5} />
          </BlockFrame>
          <BlockFrame>
             <h2>Work in Progress!</h2>

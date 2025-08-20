@@ -1,0 +1,41 @@
+{
+  "title": "mikaelbernau",
+  "link": "https://mikaelbernau.wixsite.com/portfolio",
+  "description": "Mikaelbernau",
+  "items": [
+    {
+      "title": "Portfolio Migration!",
+      "link": "https://mikaelbernau.wixsite.com/portfolio/post/portfolio-migration",
+      "description": "I have now built a new portfolio with a more professional domain. I hope you will check this out! The blog will remain at this address. ...",
+      "date": "Wed, 20 Aug 2025 13:02:49 GMT",
+      "guid": "68a5c71f38144e410f93e39e",
+      "image": "https://static.wixstatic.com/media/69d2c7_e7250e5a7f9e4817b90eddd015493ff0~mv2.png/v1/fit/w_1000,h_1000,al_c,q_80/file.png"
+    },
+    {
+      "title": "Throwback to 2020 (Fallout 4 painting)",
+      "link": "https://mikaelbernau.wixsite.com/portfolio/post/throwback-to-2020",
+      "description": "Every developer needs a hobby or two. I enjoy the Fallout games a lot. So much that I painted a location from Fallout 4 for my...",
+      "date": "Sat, 27 Jul 2024 20:36:38 GMT",
+      "guid": "66a559a6625cde078cb32bea",
+      "image": null
+    },
+    {
+      "title": "Testing out Geometry Nodes in Blender",
+      "link": "https://mikaelbernau.wixsite.com/portfolio/post/testing-out-geometry-nodes-in-blender",
+      "description": "#devlog #blender #3D-modeling #geometrynodes #geonodes Starting out Sometimes I like to dive down into a new and niche interest. It so...",
+      "date": "Tue, 06 Feb 2024 16:47:44 GMT",
+      "guid": "65c23a1f1adf2a77ad0767df",
+      "image": "https://static.wixstatic.com/media/69d2c7_93e15370d1c9497582bbd355aa9e92a7~mv2.png/v1/fit/w_1000,h_949,al_c,q_80/file.png"
+    },
+    {
+      "title": "Hello World + Portfolio Updates",
+      "link": "https://mikaelbernau.wixsite.com/portfolio/post/hello-world-portfolio-updates",
+      "description": "This is the first entry in my blog! This blog is a new section of the homepage. The reason to create a blog is to separate the portfolio...",
+      "date": "Tue, 17 Oct 2023 10:57:03 GMT",
+      "guid": "652e67ed94e0dbc955195694",
+      "image": "https://static.wixstatic.com/media/69d2c7_c4f02c8577b746ab9fb2419cebee77c7~mv2.png/v1/fit/w_709,h_955,al_c,q_80/file.png"
+    }
+  ],
+  "fetchedAt": "2025-08-20T14:37:30.229Z",
+  "source": "https://mikaelbernau.wixsite.com/portfolio/blog-feed.xml"
+}
