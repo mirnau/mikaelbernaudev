@@ -73,4 +73,7 @@ hr {
    #app {
       width: 90%;
    }
+   .noshow {
+      display: none;
+   }
 }

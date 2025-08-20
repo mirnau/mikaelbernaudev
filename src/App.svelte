@@ -353,9 +353,39 @@
          image: "/projects/foundrysr3d/homebrew.png",
          href: "https://youtu.be/YPmnX_Gp1uk",
          description: "A Homebrew System for Shadowrun 3d Edition in Foundry VTT - First Iteration",
-         tags: ["JavaScript", "Handlebars", "LESS", "CSS", "Masonry"],
+         tags: ["JavaScript", "Handlebars", "LESS", "CSS", "Masonry.js"],
          detail: () => import("./projects/foundrysr3d/FoundryFirstIteration.svelte"),
          detailProps: { year: 2024 },
+      },
+      {
+         slug: "unitynoise",
+         title: "Procedural 1D-noise from Perlin Texture in Unity",
+         image: "/projects/unitynoise/proceduralnoise.png",
+         href: "",
+         description: "A noise tool, generating a curve over time, perfect for driving random parameters",
+         tags: ["Unity", "C#", "Tool Development"],
+         detail: () => import("./projects/unitynoise/UnityNoise.svelte"),
+         detailProps: { year: 2024 },
+      },
+      {
+         slug: "boids",
+         title: "Boids",
+         image: "/projects/boids/boids.jpg",
+         href: "",
+         description: "Working with compute shaders and flocking behaviours",
+         tags: ["Unity", "C#", "Compute Shaders"],
+         detail: () => import("./projects/boids/Boids.svelte"),
+         detailProps: { year: 2022 },
+      },
+      {
+         slug: "pathfinding",
+         title: "Horror Game Project Year 2",
+         image: "/projects/pathfinding/house.jpg",
+         href: "https://youtu.be/t1OLId_HlIc",
+         description: "I implemented a behaviour tree for enemy path-finding",
+         tags: ["Unity", "C#", "Behaviour Trees", "Path Finding AI"],
+         detail: () => import("./projects/pathfindingunity/PathFinding.svelte"),
+         detailProps: { year: 2022 },
       },
    ];
 
@@ -390,7 +420,7 @@
       <Grid columns="1fr">
          <BlockFrame>
             <h3>Game programmer and development passionate about games and software!</h3>
-            <h2>Socials --></h2>
+            <h2 class="noshow">Socials --></h2>
             <Socials size="1rem" />
          </BlockFrame>
          <BlockFrame>
@@ -447,7 +477,7 @@
          </BlockFrame>
          <BlockFrame>
             <h2>Education</h2>
-            <h3>B.A. Game Development</h3>
+            <h3>B.A. in Computer Science - focus Game Development</h3>
             <h4>Malmö University</h4>
             <h5>2020-2023</h5>
             <hr />
@@ -463,7 +493,7 @@
             <h4>Konstskolan Munka</h4>
             <h5>2010-2011</h5>
             <hr />
-            <h3>M.A. Media Production</h3>
+            <h3>M.A. Social Science - focus Media Production</h3>
             <h4>Linköping University</h4>
             <h5>2006-2006</h5>
          </BlockFrame>

@@ -6,16 +6,16 @@
 <Grid columns="1fr 1fr 1fr" masonry="true">
    <div style="width:100%; aspect-ratio:16/9;">
       <iframe
-         src="https://www.youtube-nocookie.com/embed/Z8rKl2mNWtI"
+         src="https://www.youtube-nocookie.com/embed/t1OLId_HlIc"
          title="YouTube video"
          style="width:100%; height:100%; border:0; display:block;"
          loading="lazy"
          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
          referrerpolicy="strict-origin-when-cross-origin"
          allowfullscreen
-      >
-      </iframe>
+      ></iframe>
    </div>
+
    <h1>The Aquanaut (Final Game Project at Uni)</h1>
    <h2>Course: Engine-Driven Product Design</h2>
    <div>

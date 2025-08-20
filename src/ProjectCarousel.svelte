@@ -330,7 +330,7 @@
       margin: 0.25rem 0 0;
    }
    .tags li {
-      font-size: 0.8rem;
+      font-size: 1.2rem;
       padding: 0.2rem 0.5rem;
       border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 5px;
