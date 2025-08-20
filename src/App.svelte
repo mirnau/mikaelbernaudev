@@ -508,7 +508,10 @@
          </BlockFrame>
          <BlockFrame>
             <h2>Work in Progress!</h2>
-            <p>Please come back as I add more project during the comming weeks. I hope to see you here again!</p>
+            <p>
+               Please come back as I add more projects during the comming weeks. I will be updating things here and
+               there as well as fixing the occational typo I hope to see you here again!
+            </p>
          </BlockFrame>
       </Grid>
       <div style="height: 200vh;"></div>
