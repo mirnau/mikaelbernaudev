@@ -496,7 +496,7 @@
             <hr />
             <h3>M.A. Social Science - focus Media Production</h3>
             <h4>Linköping University</h4>
-            <h5>2006-2006</h5>
+            <h5>2002-2006</h5>
          </BlockFrame>
          <BlockFrame>
             <BlueSky />
