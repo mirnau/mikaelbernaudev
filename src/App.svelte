@@ -488,7 +488,7 @@
             <hr />
             <h3>Fine Art</h3>
             <h4>Göteborgs Konstskola</h4>
-            <h5>2010-2011</h5>
+            <h5>2012-2013</h5>
             <hr />
             <h3>Fine Art</h3>
             <h4>Konstskolan Munka</h4>
