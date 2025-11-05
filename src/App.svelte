@@ -482,10 +482,6 @@
             <h4>Malmö University</h4>
             <h5>2020-2023</h5>
             <hr />
-            <h3>M.A. Media Production</h3>
-            <h4>Linköping University</h4>
-            <h5>2006-2006</h5>
-            <hr />
             <h3>Fine Art</h3>
             <h4>Göteborgs Konstskola</h4>
             <h5>2012-2013</h5>
