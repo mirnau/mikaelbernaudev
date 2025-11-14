@@ -237,11 +237,21 @@
       min-height: 50vh;
       display: grid;
       gap: 0.75rem;
+      padding: 0.5rem;
+   }
+
+   @media (max-width: 640px) {
+      .carousel {
+         min-height: auto;
+         padding: 0.25rem;
+      }
    }
 
    .viewport {
-      overflow: clip;
+      overflow: hidden;
       position: relative;
+      width: 100%;
+      max-width: 100%;
    }
 
    .track {
@@ -254,20 +264,30 @@
    .slide {
       flex: 0 0 100%;
       min-width: 0;
+      max-width: 100%;
+      width: 100%;
       position: relative;
       overflow: clip;
       contain: layout paint;
       clip-path: inset(0);
    }
 
-   .card,
+   .card {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+   }
+
    .media {
       min-width: 0;
+      max-width: 100%;
    }
 
    .media {
       width: 100%;
-      height: clamp(220px, 38vw, 520px);
+      height: clamp(180px, 45vw, 520px);
       overflow: clip;
       position: relative;
    }
@@ -311,6 +331,10 @@
          transparent 100%
       );
       backdrop-filter: blur(3px);
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
    }
    h3 {
       margin: 0;
@@ -343,11 +367,13 @@
       gap: 0.5rem;
       position: relative;
       z-index: 3;
+      padding: 0.5rem;
+      min-height: 3rem;
    }
    .arrow {
       background: none;
       border: none;
-      padding: 0;
+      padding: 0.25rem;
       cursor: pointer;
       color: #fff;
       font-size: 2rem;
@@ -355,6 +381,8 @@
       align-items: center;
       justify-content: center;
       transition: transform 0.15s ease;
+      flex-shrink: 0;
+      min-width: 2.5rem;
    }
    .arrow:hover {
       transform: scale(1.15);
@@ -378,6 +406,23 @@
    .dot[data-active="true"] {
       background: #fff;
    }
+   @media (max-width: 640px) {
+      .arrow {
+         font-size: 1.5rem;
+         min-width: 2rem;
+      }
+      .meta {
+         padding: 0.5rem 0.75rem;
+      }
+      h3 {
+         font-size: clamp(1rem, 3vw, 1.4rem);
+      }
+      .tags li {
+         font-size: 0.9rem;
+         padding: 0.15rem 0.4rem;
+      }
+   }
+
    @media (pointer: coarse) {
       .track {
          transition-duration: 0.2s;
