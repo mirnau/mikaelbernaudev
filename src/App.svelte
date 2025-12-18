@@ -25,7 +25,12 @@
    onMount(() => {
       scene = new THREE.Scene();
 
-      const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
+      const camera = new THREE.PerspectiveCamera(
+         75,
+         innerWidth / innerHeight,
+         0.1,
+         1000,
+      );
       camera.position.set(0, 0, 45);
 
       renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
@@ -178,7 +183,10 @@
                   nC++;
                }
                if (d > 0 && d < params.desiredSeparation) {
-                  const diff = new THREE.Vector3().subVectors(b.position, o.position).normalize().divideScalar(d);
+                  const diff = new THREE.Vector3()
+                     .subVectors(b.position, o.position)
+                     .normalize()
+                     .divideScalar(d);
                   sep.add(diff);
                   nS++;
                }
@@ -198,7 +206,9 @@
                limit(coh, params.maxForce);
             }
             if (nS) {
-               sep.setLength(params.maxSpeed * (b.userData.speedFactor ?? 1)).sub(b.userData.vel);
+               sep.setLength(
+                  params.maxSpeed * (b.userData.speedFactor ?? 1),
+               ).sub(b.userData.vel);
                limit(sep, params.maxForce);
             }
 
@@ -207,14 +217,22 @@
             b.userData.acc
                .set(0, 0, 0)
                .add(sep.multiplyScalar(params.sepWeight))
-               .add(ali.multiplyScalar(params.alignWeight * (b.userData.alignFactor ?? 1)))
+               .add(
+                  ali.multiplyScalar(
+                     params.alignWeight * (b.userData.alignFactor ?? 1),
+                  ),
+               )
                .add(coh.multiplyScalar(params.cohWeight))
                .add(seek);
 
             const r = attractSphere.radius + 3;
             const dist2 = b.position.length();
             if (dist2 > r) {
-               const back = b.position.clone().multiplyScalar(-1).setLength(params.maxSpeed).sub(b.userData.vel);
+               const back = b.position
+                  .clone()
+                  .multiplyScalar(-1)
+                  .setLength(params.maxSpeed)
+                  .sub(b.userData.vel);
                limit(back, params.maxForce * 1.2);
                b.userData.acc.add(back);
             }
@@ -224,11 +242,17 @@
       function updateBoids(dt: number) {
          for (const b of boids as any[]) {
             b.userData.vel.add(b.userData.acc.multiplyScalar(dt));
-            limit(b.userData.vel, params.maxSpeed * (b.userData.speedFactor ?? 1));
+            limit(
+               b.userData.vel,
+               params.maxSpeed * (b.userData.speedFactor ?? 1),
+            );
             b.position.addScaledVector(b.userData.vel, dt);
             if (b.userData.vel.lengthSq() > 1e-4) {
                const dir = b.userData.vel.clone().normalize();
-               const quat = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 0, 1), dir);
+               const quat = new THREE.Quaternion().setFromUnitVectors(
+                  new THREE.Vector3(0, 0, 1),
+                  dir,
+               );
                b.quaternion.slerp(quat, 0.6);
             }
          }
@@ -254,14 +278,20 @@
 
                m.traverse((o) => {
                   if (!(o instanceof Mesh)) return;
-                  const mats = Array.isArray(o.material) ? o.material : [o.material];
+                  const mats = Array.isArray(o.material)
+                     ? o.material
+                     : [o.material];
                   const newMats: Material[] = mats.map((mat) => {
                      const std = mat as MeshStandardMaterial;
                      if (!("color" in std) || !std.color) return mat;
                      const clone = std.clone();
                      const hsl = { h: 0, s: 0, l: 0 };
                      clone.color.getHSL(hsl);
-                     hsl.s = THREE.MathUtils.clamp(hsl.s * (0.9 + Math.random() * 0.2), 0, 1);
+                     hsl.s = THREE.MathUtils.clamp(
+                        hsl.s * (0.9 + Math.random() * 0.2),
+                        0,
+                        1,
+                     );
                      clone.color.setHSL(hsl.h, hsl.s, hsl.l);
                      return clone;
                   });
@@ -271,12 +301,12 @@
                (m as any).position.set(
                   (Math.random() - 0.5) * 30,
                   (Math.random() - 0.5) * 18,
-                  (Math.random() - 0.5) * 30
+                  (Math.random() - 0.5) * 30,
                );
                (m as any).userData.vel = new THREE.Vector3(
                   Math.random() - 0.5,
                   Math.random() - 0.5,
-                  Math.random() - 0.5
+                  Math.random() - 0.5,
                ).setLength(params.maxSpeed * 0.5);
                (m as any).userData.acc = new THREE.Vector3();
                (m as any).userData.speedFactor = 0.9 + Math.random() * 0.2;
@@ -289,7 +319,7 @@
          undefined,
          (err) => {
             throw err;
-         }
+         },
       );
 
       let last = performance.now();
@@ -343,8 +373,15 @@
          title: "The Aquanaut - Final Game Production at Uni",
          image: "/projects/theaquanaut/path-recording.png",
          href: "https://youtu.be/Z8rKl2mNWtI",
-         description: "A rouge-lite underwater game. The image is from the game play path-recorder tool I wrote!",
-         tags: ["C#", "Unity", "Blender", "Adobe Creative Suite", "Teambuilding"],
+         description:
+            "A rouge-lite underwater game. The image is from the game play path-recorder tool I wrote!",
+         tags: [
+            "C#",
+            "Unity",
+            "Blender",
+            "Adobe Creative Suite",
+            "Teambuilding",
+         ],
          detail: () => import("./projects/theaquanaut/TheAquanaut.svelte"),
          detailProps: { year: 2023 },
       },
@@ -353,9 +390,11 @@
          title: "TTRPG Extention for Virtual Table Top Gaming - Iteration I",
          image: "/projects/foundrysr3d/homebrew.png",
          href: "https://youtu.be/YPmnX_Gp1uk",
-         description: "A Homebrew System for Shadowrun 3d Edition in Foundry VTT - First Iteration",
+         description:
+            "A Homebrew System for Shadowrun 3d Edition in Foundry VTT - First Iteration",
          tags: ["JavaScript", "Handlebars", "LESS", "CSS", "Masonry.js"],
-         detail: () => import("./projects/foundrysr3d/FoundryFirstIteration.svelte"),
+         detail: () =>
+            import("./projects/foundrysr3d/FoundryFirstIteration.svelte"),
          detailProps: { year: 2024 },
       },
       {
@@ -363,7 +402,8 @@
          title: "Procedural 1D-noise from Perlin Texture in Unity",
          image: "/projects/unitynoise/proceduralnoise.png",
          href: "",
-         description: "A noise tool, generating a curve over time, perfect for driving random parameters",
+         description:
+            "A noise tool, generating a curve over time, perfect for driving random parameters",
          tags: ["Unity", "C#", "Tool Development"],
          detail: () => import("./projects/unitynoise/UnityNoise.svelte"),
          detailProps: { year: 2024 },
@@ -420,7 +460,10 @@
 
       <Grid columns="1fr">
          <BlockFrame>
-            <h3>Game programmer and development passionate about games and software!</h3>
+            <h3>
+               Game programmer and development passionate about games and
+               software!
+            </h3>
             <h2 class="noshow">Socials --></h2>
             <Socials size="1rem" />
          </BlockFrame>
@@ -433,35 +476,52 @@
             <h2>Next Up</h2>
             <p>
                <b
-                  >Finding my tribe at a passionate and creative company who are as obsessed by games and a good story
-                  as I am!
-               </b> New in games but not new in the game, I look forward to make a difference, as a skilled code monkey and
-               a talented generalist game creative. I look forward to contributing to some amazing work!
+                  >Finding my tribe at a passionate, creative company that cares
+                  deeply about their craft.</b
+               >
+               I'm a programmer with a strong creative drive and a lifelong passion
+               for games. I thrive at the intersection of code and creativity — whether
+               that's building game systems, interactive experiences, or elegant
+               software solutions. I bring a cross-disciplinary background (art,
+               media production, design thinking) and a knack for picking up new
+               tech fast. I work well in teams and solo, and I'm excited to contribute
+               to work that matters.
             </p>
+
             <h2>Looking for Work</h2>
-            <h5>2023-</h5>
+            <h5>2023–</h5>
             <p>
-               Landing a game or software devjob is hard and it has been gnawrly for sometime. I am proud to do my best
-               to find new opportunities. I do my outmost to keep up with the competition. I dedicate a lot of time to
-               work on portfolio by myself and in colaborative projects with friends while taking care to feed the soul
-               by learning French and working out.
+               I'm actively seeking opportunities as a game programmer or in
+               related software development roles. I spend my time building
+               portfolio projects, collaborating with friends on creative work,
+               and sharpening my skills. When I’m not coding, I’m learning
+               French out of an interest in language and culture, and staying
+               active through strength training — it helps me keep both my mind
+               and focus sharp.
             </p>
+
             <hr />
+
             <h2>Curriculum Vitae</h2>
             <p>
-               Here is the current resume for you to view, from the perspective of my current change of career paths. It
-               lists the latest seven years of work experience and most of my education.
+               Here's my current resume, focused on recent work experience and
+               education. It covers the last seven years and the highlights
+               you'd want to know about.
             </p>
-            <center><PDFThumb src="/docs/resume_mikael_bernau.pdf" caption={"Resume"} /></center>
+
+            <center
+               ><PDFThumb
+                  src="/docs/resume_mikael_bernau.pdf"
+                  caption={"Resume"}
+               /></center
+            >
+
             <h3>LinkedIn Profile</h3>
             <p>
-               All information on my 10+ year work experience from my previous field, culture- and communication, are
-               listed in detail on my LinkedIn. If you are interested in the details they are all there!
-            </p>
-            <p>
-               <b>Please feel free to send me a contact request</b>, if you like my portfolio, if you are in computer or
-               software developer sphere as a programmer, creative or recruiter. I am open to networking, colabs and
-               game jams or just a friendly chat.
+               My LinkedIn has the full story — including 10+ years of work in
+               culture and communication before I made the jump to software
+               development. If you're curious about the broader picture, it's
+               all there.
             </p>
             <center>
                <a
@@ -475,6 +535,15 @@
                   <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
                </a>
             </center>
+
+             <h3>Connect</h3>
+            <p>
+               <b>Feel free to reach out</b> if you like what you see — whether you're
+               a programmer, creative, recruiter, or just someone who enjoys good
+               conversation. I'm always open to networking, collaborations, game
+               jams, or a friendly chat.
+            </p>
+
          </BlockFrame>
          <BlockFrame>
             <h2>Education</h2>
@@ -505,13 +574,17 @@
          </BlockFrame>
          <BlockFrame>
             <h2>Dev Log Feed</h2>
-            <BlogFeed src="https://mikaelbernau.wixsite.com/portfolio/blog-feed.xml" limit={5} />
+            <BlogFeed
+               src="https://mikaelbernau.wixsite.com/portfolio/blog-feed.xml"
+               limit={5}
+            />
          </BlockFrame>
          <BlockFrame>
             <h2>Work in Progress!</h2>
             <p>
-               Please come back as I add more projects during the comming weeks. I will be updating things here and
-               there as well as fixing the occational typo I hope to see you here again!
+               Please come back as I add more projects during the comming weeks.
+               I will be updating things here and there as well as fixing the
+               occational typo I hope to see you here again!
             </p>
          </BlockFrame>
       </Grid>
