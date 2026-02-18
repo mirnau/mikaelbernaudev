@@ -18,8 +18,8 @@
    <a href="https://youtube.com/@devdrawdiy" target="_blank" aria-label="YouTube">
       <i class="fa-brands fa-youtube"></i>
    </a>
-   <a href="https://bsky.app/profile/otterbeast.bsky.social" target="_blank" aria-label="Bluesky">
-      <i class="fa-brands fa-bluesky"></i>
+   <a href="https://mastodon.social/@otterbeast" target="_blank" rel="noopener noreferrer" aria-label="Mastodon">
+      <i class="fa-brands fa-mastodon"></i>
    </a>
    <a href="https://instagram.com/dev.draw.diy" target="_blank" aria-label="Instagram">
       <i class="fa-brands fa-instagram"></i>
