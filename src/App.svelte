@@ -12,7 +12,7 @@
    import Socials from "./Socials.svelte";
    import ProjectCarousel from "./ProjectCarousel.svelte";
    import ProjectWindow from "./ProjectWindow.svelte";
-   import BlueSky from "./BlueSky.svelte";
+   import Mastodon from "./Mastodon.svelte";
    import YouTube from "./YouTube.svelte";
    import type { Project, ProjectDetailLoader } from "./types";
 
@@ -564,7 +564,7 @@
             <h5>2002-2006</h5>
          </BlockFrame>
          <BlockFrame>
-            <BlueSky />
+            <Mastodon />
          </BlockFrame>
       </Grid>
       <Grid columns="1fr">
