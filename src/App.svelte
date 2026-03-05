@@ -475,23 +475,37 @@
          <BlockFrame>
             <h2>Next Up</h2>
             <p>
-               <b
-                  >Finding my tribe in a team that cares about what they build.</b
-               >
-               I'm a programmer with a strong creative drive and a lifelong fascination
-               with games, systems, and interactive technology. I enjoy working where
-               code meets design — building gameplay systems, interactive tools,
-               or clean software that solves real problems. My background is a bit
-               cross-disciplinary: art, media production, and design thinking alongside
-               computer science. That combination makes me comfortable moving between
-               technical implementation and the creative side of development. I pick
-               up new tech quickly, enjoy digging into unfamiliar problems, and I'm
-               equally happy collaborating in a team or working independently.
+               <b>
+                  Finding my tribe in a team that cares about what they build.
+               </b>
+            </p>
+
+            <p>
+               I'm a programmer with a strong creative drive and a lifelong
+               fascination with games, systems, and interactive technology. I
+               enjoy working where code meets design — building gameplay
+               systems, interactive tools, or clean software that solves real
+               problems.
+            </p>
+
+            <p>
+               My background is cross-disciplinary: art, media production,
+               design thinking, and computer science. It makes me comfortable
+               moving between technical implementation and the creative side of
+               development.
+            </p>
+
+            <p>
+               I pick up new tech quickly, enjoy digging into unfamiliar
+               problems, and I'm equally happy collaborating in a team or
+               working independently.
             </p>
 
             <h2>Maybe we should work together?</h2>
 
-            <p>I'm currently looking for opportunities as a programmer.</p>
+            <p>
+               <b> I'm currently looking for opportunities as a programmer.</b>
+            </p>
 
             <p>
                In the meantime I'm doing what I usually do when something
