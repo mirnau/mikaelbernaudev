@@ -483,9 +483,8 @@
             <p>
                I'm a programmer with a strong creative drive and a lifelong
                fascination with games, systems, and interactive technology. I
-               enjoy working where code meets design — building gameplay
-               systems, interactive tools, or clean software that solves real
-               problems.
+               enjoy working where code meets design, building gameplay systems,
+               interactive tools, or clean software that solves real problems.
             </p>
 
             <p>
@@ -504,24 +503,24 @@
             <h2>Maybe we should work together?</h2>
 
             <p>
-               <b> I'm currently looking for opportunities as a programmer.</b>
+               <b>I'm currently looking for opportunities as a programmer.</b>
             </p>
 
             <p>
                In the meantime I'm doing what I usually do when something
-               interests me — building things and experimenting.
+               interests me: building things and experimenting.
             </p>
 
             <p>
                Most of my spare time goes into portfolio projects and playing
-               around with ideas — sometimes games, sometimes small tools or
+               around with ideas. Sometimes games, sometimes small tools or
                systems just to understand how they work.
             </p>
 
             <p>
-               Outside programming I’m learning French (seriously!) out of a
-               love for language and culture, and I spend time strength training
-               — it keeps both my focus and energy in good shape.
+               Outside programming I'm learning French (seriously!) out of a
+               love for language and culture, and I spend time strength
+               training. It helps keep both my focus and energy in good shape.
             </p>
 
             <hr />
@@ -533,20 +532,21 @@
                you'd want to know about.
             </p>
 
-            <center
-               ><PDFThumb
+            <center>
+               <PDFThumb
                   src="/docs/resume_mikael_bernau.pdf"
                   caption={"Resume"}
-               /></center
-            >
+               />
+            </center>
 
             <h3>LinkedIn Profile</h3>
             <p>
-               My LinkedIn has the full story — including 10+ years of work in
+               My LinkedIn has the full story, including 10+ years of work in
                culture and communication before I made the jump to software
                development. If you're curious about the broader picture, it's
                all there.
             </p>
+
             <center>
                <a
                   href="https://www.linkedin.com/in/mikaelbernau/"
@@ -562,7 +562,7 @@
 
             <h3>Connect</h3>
             <p>
-               <b>Feel free to reach out</b> if you like what you see — whether you're
+               <b>Feel free to reach out</b> if you like what you see, whether you're
                a programmer, creative, recruiter, or just someone who enjoys good
                conversation. I'm always open to networking, collaborations, game
                jams, or a friendly chat.
