@@ -374,7 +374,7 @@
          image: "/projects/theaquanaut/path-recording.png",
          href: "https://youtu.be/Z8rKl2mNWtI",
          description:
-            "A rouge-lite underwater game. The image is from the game play path-recorder tool I wrote!",
+            "A rogue-lite underwater game. The image is from the gameplay path-recorder tool I wrote!",
          tags: [
             "C#",
             "Unity",
@@ -387,11 +387,11 @@
       },
       {
          slug: "sr3d",
-         title: "TTRPG Extention for Virtual Table Top Gaming - Iteration I",
+         title: "TTRPG Extension for Virtual Table Top Gaming - Iteration I",
          image: "/projects/foundrysr3d/homebrew.png",
          href: "https://youtu.be/YPmnX_Gp1uk",
          description:
-            "A Homebrew System for Shadowrun 3d Edition in Foundry VTT - First Iteration",
+            "A Homebrew System for Shadowrun 3rd Edition in Foundry VTT - First Iteration",
          tags: ["JavaScript", "Handlebars", "LESS", "CSS", "Masonry.js"],
          detail: () =>
             import("./projects/foundrysr3d/FoundryFirstIteration.svelte"),
@@ -423,7 +423,7 @@
          title: "Horror Game Project Year 2",
          image: "/projects/pathfinding/house.jpg",
          href: "https://youtu.be/t1OLId_HlIc",
-         description: "I implemented a behaviour tree for enemy path-finding",
+         description: "I implemented a behaviour tree for enemy pathfinding",
          tags: ["Unity", "C#", "Behaviour Trees", "Path Finding AI"],
          detail: () => import("./projects/pathfindingunity/PathFinding.svelte"),
          detailProps: { year: 2022 },
@@ -461,8 +461,8 @@
       <Grid columns="1fr">
          <BlockFrame>
             <h3>
-               Game programmer and development passionate about games and
-               software!
+               Welcome to my portfolio! Click the slideshow to access details on
+               projects. And check out my socials if you like.
             </h3>
             <h2 class="noshow">Socials --></h2>
             <Socials size="1rem" />
@@ -476,28 +476,38 @@
             <h2>Next Up</h2>
             <p>
                <b
-                  >Finding my tribe at a passionate, creative company that cares
-                  deeply about their craft.</b
+                  >Finding my tribe in a team that cares about what they build.</b
                >
-               I'm a programmer with a strong creative drive and a lifelong passion
-               for games. I thrive at the intersection of code and creativity — whether
-               that's building game systems, interactive experiences, or elegant
-               software solutions. I bring a cross-disciplinary background (art,
-               media production, design thinking) and a knack for picking up new
-               tech fast. I work well in teams and solo, and I'm excited to contribute
-               to work that matters.
+               I'm a programmer with a strong creative drive and a lifelong fascination
+               with games, systems, and interactive technology. I enjoy working where
+               code meets design — building gameplay systems, interactive tools,
+               or clean software that solves real problems. My background is a bit
+               cross-disciplinary: art, media production, and design thinking alongside
+               computer science. That combination makes me comfortable moving between
+               technical implementation and the creative side of development. I pick
+               up new tech quickly, enjoy digging into unfamiliar problems, and I'm
+               equally happy collaborating in a team or working independently.
             </p>
 
-            <h2>Looking for Work</h2>
-            <h5>2023–</h5>
+            <h2>Maybe we should work together?</h2>
+
+            <p>I'm currently looking for opportunities as a programmer.</p>
+
             <p>
-               I'm actively seeking opportunities as a game programmer or in
-               related software development roles. I spend my time building
-               portfolio projects, collaborating with friends on creative work,
-               and sharpening my skills. When I’m not coding, I’m learning
-               French out of an interest in language and culture, and staying
-               active through strength training — it helps me keep both my mind
-               and focus sharp.
+               In the meantime I'm doing what I usually do when something
+               interests me — building things and experimenting.
+            </p>
+
+            <p>
+               Most of my spare time goes into portfolio projects and playing
+               around with ideas — sometimes games, sometimes small tools or
+               systems just to understand how they work.
+            </p>
+
+            <p>
+               Outside programming I’m learning French (seriously!) out of a
+               love for language and culture, and I spend time strength training
+               — it keeps both my focus and energy in good shape.
             </p>
 
             <hr />
@@ -536,14 +546,13 @@
                </a>
             </center>
 
-             <h3>Connect</h3>
+            <h3>Connect</h3>
             <p>
                <b>Feel free to reach out</b> if you like what you see — whether you're
                a programmer, creative, recruiter, or just someone who enjoys good
                conversation. I'm always open to networking, collaborations, game
                jams, or a friendly chat.
             </p>
-
          </BlockFrame>
          <BlockFrame>
             <h2>Education</h2>
@@ -582,9 +591,9 @@
          <BlockFrame>
             <h2>Work in Progress!</h2>
             <p>
-               Please come back as I add more projects during the comming weeks.
+               Please come back as I add more projects during the coming weeks.
                I will be updating things here and there as well as fixing the
-               occational typo I hope to see you here again!
+               occasional typo. I hope to see you here again!
             </p>
          </BlockFrame>
       </Grid>
