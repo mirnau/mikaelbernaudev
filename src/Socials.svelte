@@ -33,6 +33,9 @@
    <a href="https://behance.net/mikaelbernau" target="_blank" aria-label="Behance">
       <i class="fa-brands fa-behance"></i>
    </a>
+   <a href="https://discord.com/users/mikaelbernau" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+      <i class="fa-brands fa-discord"></i>
+   </a>
 </nav>
 
 <style>
