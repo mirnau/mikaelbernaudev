@@ -17,7 +17,7 @@
       </div>
 
       <h1>Foundry VTT Shadowrun 3d. Edition Homebrew System</h1>
-      <a href="https://github.com/mirnau/sr3d">Github</a>
+      <a href="https://github.com/devdrawdiy/sr3d">Github</a>
       <p>
          For this project I have taken a small detour from conventional engine-driven game development. Table-top role
          playing games are a beloved hobby and social activity the world over, where people tell a story together.

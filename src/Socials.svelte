@@ -27,7 +27,7 @@
    <a href="https://mikaelbernau.itch.io" target="_blank" aria-label="Itch.io">
       <i class="fa-brands fa-itch-io"></i>
    </a>
-   <a href="https://github.com/mirnau" target="_blank" aria-label="GitHub">
+   <a href="https://github.com/devdrawdiy" target="_blank" aria-label="GitHub">
       <i class="fa-brands fa-github"></i>
    </a>
    <a href="https://behance.net/mikaelbernau" target="_blank" aria-label="Behance">

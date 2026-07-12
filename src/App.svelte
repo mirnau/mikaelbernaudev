@@ -369,6 +369,18 @@
 
    const items: Project[] = [
       {
+         slug: "sr3e",
+         title: "TTRPG Extension for Virtual Table Top Gaming - Iteration II",
+         image: "/projects/foundrysr3eII/screenshot.png",
+         href: "https://youtu.be/qKfM4xvRxYo",
+         description:
+            "A full Svelte 5 and TypeScript rewrite of the Shadowrun 3rd Edition Homebrew System for Foundry VTT - a feature-complete, playable second iteration.",
+         tags: ["Svelte 5", "TypeScript", "SCSS", "Vite", "Vitest"],
+         detail: () =>
+            import("./projects/foundrysr3eII/FoundrySecondIteration.svelte"),
+         detailProps: { year: 2026 },
+      },
+      {
          slug: "aquanaut",
          title: "The Aquanaut - Final Game Production at Uni",
          image: "/projects/theaquanaut/path-recording.png",
