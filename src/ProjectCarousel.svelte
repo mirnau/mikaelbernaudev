@@ -117,6 +117,8 @@
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
+<h2>Portfolio</h2>
+<h4>Use arrows to navigate between projects. Click on them to read more.</h4>
 <div class="carousel" onmouseenter={stopAuto} onmouseleave={startAuto}>
    <div class="viewport" bind:this={frame}>
       <div
